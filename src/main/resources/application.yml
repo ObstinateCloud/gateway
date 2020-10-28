@@ -12,6 +12,11 @@ spring:
       discovery:
         locator:
           enabled: true
+      routes:
+        - id: between_route_zjy
+          uri: lb://user-center
+          predicates:
+            - TimeBetween=上午8:15,下午7:15
 
 management:
   endpoints:
