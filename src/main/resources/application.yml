@@ -16,7 +16,10 @@ spring:
         - id: between_route_zjy
           uri: lb://user-center
           predicates:
-            - TimeBetween=上午8:15,下午7:15
+            - TimeBetween=上午8:15,下午11:15
+          filters:
+            - AddRequestHeader=X-Request-Foo,Bar
+            - PreLog=name,zjy
 
 management:
   endpoints:
