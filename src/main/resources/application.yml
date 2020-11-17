@@ -13,14 +13,18 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: between_route_zjy
+        - id: user_route
           uri: lb://user-center
           predicates:
-            - TimeBetween=上午8:15,下午11:15
-          filters:
-            - AddRequestHeader=X-Request-Foo,Bar
-            - PreLog=name,zjy
-
+             - Path=/users/**
+#            - TimeBetween=上午8:15,下午11:15
+#          filters:
+#            - AddRequestHeader=X-Request-Foo,Bar
+#            - PreLog=name,zjy
+        - id: content_route
+          uri: lb://content-center
+          predicates:
+             - Path=shares/**,admin/**
 management:
   endpoints:
     web:
@@ -29,3 +33,8 @@ management:
   endpoint:
     health:
       show-details: always
+
+jwt:
+  secret: zjy1234567890
+  # 有效期，单位秒，默认2周
+  expire-time-in-second: 1209600
